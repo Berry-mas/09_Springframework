@@ -1,6 +1,9 @@
 package com.ohgiraffers.associationmapping.section03.bidirection;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 import java.util.List;
 
@@ -10,9 +13,7 @@ public class Category {
 
     @Id
     private int categoryCode;
-
     private String categoryName;
-
     private Integer refCategoryCode;
 
     @OneToMany(mappedBy="category")

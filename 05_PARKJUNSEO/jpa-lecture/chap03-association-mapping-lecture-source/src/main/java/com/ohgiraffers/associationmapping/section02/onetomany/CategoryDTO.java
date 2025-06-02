@@ -1,5 +1,6 @@
 package com.ohgiraffers.associationmapping.section02.onetomany;
 
+import com.ohgiraffers.associationmapping.section02.onetomany.MenuDTO;
 import lombok.*;
 
 import java.util.List;
@@ -15,5 +16,5 @@ public class CategoryDTO {
     private int categoryCode;
     private String categoryName;
     private Integer refCategoryCode;
-    private List<MenuDTO> menuDTOList;
+    private List<MenuDTO> menuList;
 }

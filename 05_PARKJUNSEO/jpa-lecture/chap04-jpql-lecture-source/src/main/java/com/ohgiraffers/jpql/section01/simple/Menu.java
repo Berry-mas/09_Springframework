@@ -1,44 +1,29 @@
-package com.ohgiraffers.associationmapping.section03.bidirection;
+package com.ohgiraffers.jpql.section01.simple;
 
 import jakarta.persistence.*;
 
-@Entity(name="bidirection_menu")
-@Table(name = "tbl_menu")
+@Entity(name="Section01Menu")
+@Table(name="tbl_menu")
 public class Menu {
-
     @Id
     private int menuCode;
     private String menuName;
     private int menuPrice;
-
-    @JoinColumn(name="categoryCode")
-    @ManyToOne
-    private Category category;
-
+    private int categoryCode;
     private String orderableStatus;
 
-    protected Menu() {}
-
-    public Menu(
-            int menuCode, String menuName, int menuPrice, String orderableStatus
-    ) {
-        this.menuCode = menuCode;
-        this.menuName = menuName;
-        this.menuPrice = menuPrice;
-        this.orderableStatus = orderableStatus;
-    }
-
+    public Menu() {}
     public Menu(
             int menuCode, String menuName, int menuPrice,
-            Category category, String orderableStatus
+            int categoryCode, String orderableStatus
     ) {
+        super();
         this.menuCode = menuCode;
         this.menuName = menuName;
         this.menuPrice = menuPrice;
-        this.category = category;
+        this.categoryCode = categoryCode;
         this.orderableStatus = orderableStatus;
     }
-
     public int getMenuCode() {
         return menuCode;
     }
@@ -57,15 +42,12 @@ public class Menu {
     public void setMenuPrice(int menuPrice) {
         this.menuPrice = menuPrice;
     }
-
-    public Category getCategory() {
-        return category;
+    public int getCategoryCode() {
+        return categoryCode;
     }
-
-    public void setCategory(Category category) {
-        this.category = category;
+    public void setCategoryCode(int categoryCode) {
+        this.categoryCode = categoryCode;
     }
-
     public String getOrderableStatus() {
         return orderableStatus;
     }
@@ -74,10 +56,8 @@ public class Menu {
     }
     @Override
     public String toString() {
-        return "Menu [menuCode=" + menuCode +
-                ", menuName=" + menuName +
-                ", menuPrice=" + menuPrice +
-                ", category=" + category +
+        return "Menu [menuCode=" + menuCode + ", menuName=" + menuName +
+                ", menuPrice=" + menuPrice + ", categoryCode=" + categoryCode +
                 ", orderableStatus=" + orderableStatus + "]";
     }
 }
