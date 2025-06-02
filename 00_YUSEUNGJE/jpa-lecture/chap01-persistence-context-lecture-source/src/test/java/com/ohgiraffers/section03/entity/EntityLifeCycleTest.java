@@ -163,4 +163,39 @@ class EntityLifeCycleTest {
         assertNotEquals(foundMenu, expectedMenu);
     }
 
+    @DisplayName("준영속화 close 테스트")
+    @ParameterizedTest
+    @ValueSource(ints = {1, 3})
+    void testClosePersistenceContext(int menuCode) {
+        EntityManager entityManager = EntityManagerGenerator.getInstance();
+        Menu foundMenu = entityManager.find(Menu.class, menuCode);  // 영속화
+
+        // close : 영속성 컨텍스트를 종료한다. -> 영속성 컨텍스트 내의 모든 엔터티는 준 영속화 된다.
+        entityManager.close();
+
+        assertThrows(
+                IllegalStateException.class,
+                () -> entityManager.find(Menu.class, menuCode)
+        );
+    }
+
+    @DisplayName("영속성 엔터티 삭제 remove 테스트")
+    @ParameterizedTest
+    @ValueSource(ints = {21})
+    void testRemoveEntity(int menuCode) {
+        EntityManager entityManager = EntityManagerGenerator.getInstance();
+        EntityTransaction entityTransaction = entityManager.getTransaction();
+        Menu foundMenu = entityManager.find(Menu.class, menuCode);  // 영속화
+
+        entityTransaction.begin();
+        // remove : 엔터티를 영속성 컨텍스트 및 데이터베이스에서 삭제한다.
+        // 단, 트랜잭션을 제어하지 않으면 데이터베이스에 영구 반영 되지는 않는다.
+        entityManager.remove(foundMenu);
+        entityManager.flush();
+
+        Menu refoundMenu = entityManager.find(Menu.class, menuCode);
+        assertNull(refoundMenu);
+        entityTransaction.rollback();
+    }
+
 }
