@@ -26,11 +26,11 @@ public class Application {
                 case 2 :
                     menuController.selectMenuByMenuCode(inputMenuCode()); break;
                 case 3 :
-                    break;
+                    menuController.registMenu(inputMenu());break;
                 case 4 :
-                    break;
+                    menuController.modifyMenu(inputModifyMenu()); break;
                 case 5 :
-                    break;
+                    menuController.deleteMenu(inputMenuCode()); break;
                 default :
                     System.out.println("잘못 된 번호를 선택하셨습니다.");
                     break;

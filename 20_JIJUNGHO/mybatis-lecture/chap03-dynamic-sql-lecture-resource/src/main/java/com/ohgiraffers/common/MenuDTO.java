@@ -8,13 +8,17 @@ public class MenuDTO {
     private int categoryCode;
     private String orderableStatus;
 
-//    public MenuDTO(int menuCode, String menuName, int menuPrice, int categoryCode, String orderableStatus) {
-//        this.menuCode = menuCode;
-//        this.menuName = menuName;
-//        this.menuPrice = menuPrice;
-//        this.categoryCode = categoryCode;
-//        this.orderableStatus = orderableStatus;
-//    }
+    public MenuDTO(int menuCode, String menuName, int menuPrice, int categoryCode, String orderableStatus) {
+        this.menuCode = menuCode;
+        this.menuName = menuName;
+        this.menuPrice = menuPrice;
+        this.categoryCode = categoryCode;
+        this.orderableStatus = orderableStatus;
+    }
+
+    public MenuDTO() {
+
+    }
 
     public void setMenuCode(int menuCode) {
         this.menuCode = menuCode;

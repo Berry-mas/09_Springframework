@@ -17,7 +17,7 @@ public class FormDataTest extends HttpServlet {
          * 인자로 input 태그의 name속성 값을 문자열 형태로 전달한다.
          * 모든 input 태그의 값을 hashmap으로 관리하고 있으므로 원하는 값을 찾기 위해
          * key 역할을 할 문자열이 필요하다
-         * */
+         * */ 
         String name = request.getParameter("name");
         System.out.println("name = " + name);
         int age = Integer.parseInt(request.getParameter("age"));

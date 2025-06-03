@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ohgiraffers.practice.employee.model.dao.EmployeeMapper">
+
+    <select id="selectAllMember" resultType="com.ohgiraffers.practice.employee.model.dto.EmployeeDTO">
+        SELECT
+        EMP_ID,
+        EMP_NAME,
+        EMP_NO,
+        EMAIL,
+        PHONE,
+        DEPT_CODE,
+        JOB_CODE,
+        SAL_LEVEL,
+        SALARY,
+        BONUS,
+        MANAGER_ID,
+        HIRE_DATE,
+        QUIT_DATE,
+        QUIT_YN
+        FROM employee
+
+    </select>
+
+    <select id="selectEmployeeById" resultType="com.ohgiraffers.practice.employee.model.dto.EmployeeDTO">
+        SELECT
+        EMP_ID,
+        EMP_NAME,
+        EMP_NO,
+        EMAIL,
+        PHONE,
+        DEPT_CODE,
+        JOB_CODE,
+        SAL_LEVEL,
+        SALARY,
+        BONUS,
+        MANAGER_ID,
+        HIRE_DATE,
+        QUIT_DATE,
+        QUIT_YN
+        FROM employee
+        WHERE EMP_ID = #{empId}
+    </select>
+    <insert id="insertEmployee" parameterType="com.ohgiraffers.practice.employee.model.dto.EmployeeDTO">
+        INSERT INTO employee (
+        EMP_ID,
+        EMP_NAME,
+        EMP_NO,
+        EMAIL,
+        PHONE,
+        DEPT_CODE,
+        JOB_CODE,
+        SAL_LEVEL,
+        SALARY,
+        BONUS,
+        MANAGER_ID,
+        HIRE_DATE,
+        QUIT_DATE,
+        QUIT_YN
+        )
+        VALUES (
+        #{empId},
+        #{empName},
+        #{empNo},
+        #{email},
+        #{phone},
+        #{deptCode},
+        #{jobCode},
+        #{salLevel},
+        #{salary},
+        #{bonus},
+        #{managerId},
+        #{hireDate},
+        #{quitDate},
+        #{quitYn}
+        )
+    </insert>
+
+</mapper>

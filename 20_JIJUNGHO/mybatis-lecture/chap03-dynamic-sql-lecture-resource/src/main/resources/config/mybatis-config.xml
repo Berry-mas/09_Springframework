@@ -25,7 +25,9 @@
             </dataSource>
         </environment>
     </environments>
+
     <mappers>
         <package name="com.ohgiraffers.section01.xml"/>
+        <package name="com.ohgiraffers.section02.provider"/>
     </mappers>
 </configuration>

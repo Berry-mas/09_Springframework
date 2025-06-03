@@ -41,4 +41,32 @@
         FROM tbl_menu
         WHERE menu_code = #{menuCode}
     </select>
+
+    <!--
+        id : 필수
+        resultMap or resultType 은 조회 시에만 필요하며
+        DML 구문 실행 시에는 수행 된 행의 개수가 기본적으로 반환
+        parameterType : optional
+        자주 사용하는 타입이 있다면 config에서 별칭을 등록해서 사용 가능하며
+        그렇지 않다면 패키지명을 포함한 풀네임으로 작성해야 한다.
+    -->
+    <insert id="insertMenu" parameterType="com.ohgiraffers.section01.xmlconfig.MenuDTO">
+        INSERT
+            INTO tbl_menu(menu_name, menu_price, category_code, orderable_status)
+        VALUES
+            (#{menuName}, #{menuPrice}, #{categoryCode}, 'Y')
+    </insert>
+
+    <update id="updateMenu" parameterType="com.ohgiraffers.section01.xmlconfig.MenuDTO">
+        UPDATE tbl_menu
+            SET menu_name = #{menuName}
+            ,   menu_price = #{menuPrice}
+            ,   category_code = #{categoryCode}
+        WHERE menu_code = #{menuCode}
+    </update>
+
+    <delete id="deleteMenu" parameterType="_int">
+        DELETE FROM tbl_menu
+        WHERE menu_code = #{menuCode}
+    </delete>
 </mapper>

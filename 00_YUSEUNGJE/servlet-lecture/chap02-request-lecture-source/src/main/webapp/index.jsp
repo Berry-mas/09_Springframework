@@ -30,8 +30,7 @@
     <label>취미 : </label>
     <input type="checkbox" name="hobbies" id="movie" value="movie"><label for="movie">영화</label>
     <input type="checkbox" name="hobbies" id="music" value="music"><label for="music">음악</label>
-    <input type="checkbox" name="hobbies" id="sleep" value="sleep"><label for="sleep">취침</label>
-    <br>
+    <input type="checkbox" name="hobbies" id="sleep" value="sleep"><label for="sleep">취침</label>    <br>
 
     <input type="submit" value="GET 요청">
 
