@@ -13,10 +13,8 @@ public class NamedQueryRepository {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public List<Object[]> selectByNamedNativeQuery() {
+    public List<Object[]> selectByNamedNativeQuery(){
         Query nativeQuery = entityManager.createNamedQuery("Category.menuCountOfCategory");
         return nativeQuery.getResultList();
     }
-
-
 }

@@ -19,8 +19,8 @@ class NativeQueryRepositoryTest {
     @Test
     void testNativeQueryByResultType() {
 
-        int menuPrice = 15;
-        Menu foundMenu = nativeQueryRepository.nativeQueryByResultType(menuPrice);
+        int menuCode = 15;
+        Menu foundMenu = nativeQueryRepository.nativeQueryByResultType(menuCode);
         assertNotNull(foundMenu);
         System.out.println("foundMenu = " + foundMenu);
     }
@@ -28,34 +28,33 @@ class NativeQueryRepositoryTest {
     @DisplayName("결과 타입을 정의하지 않은 Native Query 테스트")
     @Test
     void testNativeQueryByNoResultType() {
-        List<Object[]> menuList = nativeQueryRepository.nativeQueryByNoResultType();
+        List<Object[]> menuList = nativeQueryRepository.nativeQueryByNoReultType();
         assertNotNull(menuList);
         menuList.forEach(row -> {
-            for (Object column : row) System.out.print(column + " ");
+            for(Object column : row) System.out.print(column + " ");
             System.out.println();
         });
     }
 
-    @DisplayName("자동 결과 매핑을 사용한 Native Query 테스트")
+    @DisplayName("자동결과 매핑을 사용한 Native Query 테스트")
     @Test
     void testNativeQueryByAutoMapping() {
         List<Object[]> categoryList = nativeQueryRepository.nativeQueryByAutoMapping();
         assertNotNull(categoryList);
         categoryList.forEach(row -> {
-            for (Object column : row) System.out.print(column + " ");
+            for(Object column : row) System.out.print(column + " ");
             System.out.println();
         });
     }
 
-    @DisplayName("수동 결과 매핑을 사용한 Native Query 테스트")
+    @DisplayName("수동 결과 매핑을 사용한 Native Query 조회 테스트")
     @Test
-    public void testNativeQueryByManualMapping() {
+    public void testNativeQueryByManualMapping(){
         List<Object[]> categoryList = nativeQueryRepository.nativeQueryByManualMapping();
         assertNotNull(categoryList);
         categoryList.forEach(row -> {
-            for (Object column : row) System.out.print(column + "/ ");
+            for(Object column : row) System.out.print(column + "/ ");
             System.out.println();
         });
     }
-
 }

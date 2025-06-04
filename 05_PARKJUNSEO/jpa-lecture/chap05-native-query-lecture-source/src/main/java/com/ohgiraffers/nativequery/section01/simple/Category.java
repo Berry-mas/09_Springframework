@@ -1,10 +1,13 @@
 package com.ohgiraffers.nativequery.section01.simple;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
-@Entity(name = "Section01Category")
-@Table (name = "tbl_category")
+@Entity(name="Section01Category")
+@Table(name="tbl_category")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter

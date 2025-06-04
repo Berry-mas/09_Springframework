@@ -6,8 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-@Entity(name = "Section01Category")
-@Table (name = "tbl_category")
+@Entity(name="Section02Category")
+@Table(name="tbl_category")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter

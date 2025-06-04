@@ -1,12 +1,18 @@
 package com.ohgiraffers.nativequery.section01.simple;
 
-import jakarta.persistence.*;
-import lombok.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
-@Entity(name = "Section01Menu")
-@Table(name = "tbl_menu")
+@Entity(name="Section01Menu")
+@Table(name="tbl_menu")
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
 @ToString
 public class Menu {
 
@@ -16,6 +22,4 @@ public class Menu {
     private int menuPrice;
     private int categoryCode;
     private String orderableStatus;
-
-
 }
