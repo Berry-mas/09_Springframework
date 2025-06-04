@@ -7,14 +7,12 @@ spring:
   jpa:
     show-sql: true
     hibernate:
-      ddl-auto: none
+      ddl-auto: create
       naming:
         physical-strategy: org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy
     properties:
       hibernate:
         format_sql: true
-    mapping-resources:
-      - section08/namedquery/menu-query.xml
   output:
     ansi:
-      enabled: always
+      enabled: always   # console color
