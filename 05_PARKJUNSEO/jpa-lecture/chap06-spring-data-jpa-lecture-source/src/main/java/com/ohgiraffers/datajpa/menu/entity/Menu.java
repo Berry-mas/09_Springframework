@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Table(name = "tbl_menu")
+@Table(name="tbl_menu")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
 @Builder
@@ -19,7 +19,7 @@ public class Menu {
     private int categoryCode;
     private String orderableStatus;
 
-    public void modifyMenuName(String menuName) {
+    public void modifyMenuName(String menuName){
         this.menuName = menuName;
     }
 }

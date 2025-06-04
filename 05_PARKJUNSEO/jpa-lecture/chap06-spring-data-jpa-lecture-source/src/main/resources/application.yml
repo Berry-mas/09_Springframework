@@ -1,4 +1,3 @@
-# spring.application.name=chap06-spring-data-jpa-lecture-source
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -16,4 +15,4 @@ spring:
         format_sql: true
   output:
     ansi:
-      enabled: always   # console color
+      enabled: always

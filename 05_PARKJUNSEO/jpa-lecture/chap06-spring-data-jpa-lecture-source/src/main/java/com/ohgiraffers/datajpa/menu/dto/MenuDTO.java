@@ -1,6 +1,8 @@
 package com.ohgiraffers.datajpa.menu.dto;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
@@ -12,5 +14,4 @@ public class MenuDTO {
     private int menuPrice;
     private int categoryCode;
     private String orderableStatus;
-
 }
