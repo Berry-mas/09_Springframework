@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 import java.util.Map;
 
 @Entity
-@Table(name="tbl_user_setting")
+@Table(name="tbl_user_setting_a")
 @Data
 @Setter(AccessLevel.PRIVATE)
 @NoArgsConstructor
