@@ -54,10 +54,10 @@ public class NamedQueryRepository {
         return menuList;
     }
 
-    public Menu selectByNamedQueryWithXml(int menuCode) {
-        Menu founMenu = entityManager.createNamedQuery("Section08Menu.selectMenuByCode", Menu.class)
+    public Menu selectByNamedQueryWithXml(int menuCode){
+        Menu foundMenu = entityManager.createNamedQuery("Section08Menu.selectMenuByCode", Menu.class)
                 .setParameter("menuCode", menuCode)
                 .getSingleResult();
-        return founMenu;
+        return foundMenu;
     }
 }
