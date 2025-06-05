@@ -7,8 +7,8 @@ import org.hibernate.annotations.UpdateTimestamp;
 import java.time.LocalDateTime;
 import java.util.Map;
 
-@Entity
-@Table(name="tbl_user_setting_a")
+@Entity(name="UserSetting_1")
+@Table(name="tbl_user_setting_1")
 @Data
 @Setter(AccessLevel.PRIVATE)
 @NoArgsConstructor
@@ -20,7 +20,7 @@ public class UserSetting {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name="user_id")
-    private Long userId;
+    private Long userId; // 사용자 Aggregate의 루트엔티티 PK
 
     @Column(name="updated_at")
     @UpdateTimestamp
@@ -28,8 +28,8 @@ public class UserSetting {
 
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(
-            name="tbl_user_setting_map",
-            joinColumns = @JoinColumn(name="user_setting_id")
+            name="tbl_user_setting_map1",
+            joinColumns = @JoinColumn(name="user_setting_id1")
     )
     @MapKeyColumn(name="name") // Map의 key컬럼명
     @Column(name="value")  // Map의 value컬럼명

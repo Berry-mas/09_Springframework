@@ -15,16 +15,16 @@ public class Template {
     public static SqlSession getSqlSession() {
 
         if(sqlSessionFactory == null) {
-            String resource = "com/ohgirraffers/section01/xmlconfig/mybatis-config.xml";
+            String resource = "com/ohgiraffers/section01/xmlconfig/mybatis-config.xml";
 
             try {
-
                 InputStream inputStream = Resources.getResourceAsStream(resource);
                 sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         }
-        return sqlSessionFactory.openSession();
+
+        return sqlSessionFactory.openSession(false);
     }
 }

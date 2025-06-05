@@ -13,6 +13,11 @@ spring:
     properties:
       hibernate:
         format_sql: true
+    mapping-resources:
+      - section08/namedquery/menu-query.xml
+  output:
+    ansi:
+      enabled: always
 
   # ddl-auto 옵션 선택
   # 개발 초기 단계

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ohgiraffers.practice.employee.model.dao.EmployeeMapper">
+
+    <select id="selectAllMember" resultType="EmployeeDTO">
+        SELECT * FROM employee
+    </select>
+
+    <select id="selectMemberByMemberCode" resultType="EmployeeDTO">
+        SELECT * FROM employee WHERE emp_id = #{empId}
+    </select>
+
+    <insert id="insertMember" parameterType="com.ohgiraffers.practice.employee.model.dto.EmployeeDTO">
+        INSERT INTO employee(emp_id, emp_name, email)
+        VALUES ((SELECT IFNULL(MAX(emp_id), 0) + 1 FROM employee e), #{empName}, #{email})
+    </insert>
+</mapper>

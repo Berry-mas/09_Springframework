@@ -83,6 +83,7 @@ class EntityLifeCycleTest {
         // detach : 특정 엔터티만 준영속 상태(관리하던 객체를 관리하지 않는 상태로 변경)로 만듦
         entityManager.detach(foundMenu);
         foundMenu.setMenuPrice(menuPrice);
+        System.out.println("foundMenu = " + foundMenu);
         // flush: 영속성 컨텍스트의 상태를 DB로 내보낸다. 단, commit 하지 않았을 경우 rollback 가능
         entityManager.flush();
         // then
@@ -104,10 +105,10 @@ class EntityLifeCycleTest {
         entityManager.detach(foundMenu);        // 준영속화
         foundMenu.setMenuPrice(menuPrice);    // 아무런 반응이 일어나지 않는다.
 
-        // merge: 파라미터로 넘어온 준영속 엔터티 객체의 식별자 값으로 1차 캐시에서 엔터티 객체를 조회
-        // 없으면 DB에서 조회 후 1차 캐시에 저장
+        // merge : 파라미터로 넘어온 준영속 엔터티 객체의 식별자 값으로 1차 캐시에서 엔터티 객체를 조회한다.
+        // (없으면 DB에서 조회하여 1차 캐시에 저장한다.)
         // 조회한 영속 엔터티 객체에 준영속 상태의 엔터티 객체의 값을 병합한 뒤 영속 엔터티 객체를 반환한다.
-        // 혹은 조회할 수 없는 데이터라면 새로 생성하여 반환한다.
+        // 혹은 조회할 수 없는 데이터라면 새로 생성해서 반환한다.
         entityManager.merge(foundMenu);
         entityManager.flush();
         // then
@@ -115,34 +116,34 @@ class EntityLifeCycleTest {
         entityTransaction.rollback();
     }
 
-    @DisplayName("detacj 후 merge한 데이터 update 테스트")
+    @DisplayName("detach 후 merge 한 데이터 update 테스트")
     @ParameterizedTest
-    @CsvSource({"11, 하얀 민트초코죽"})
-    void testMergeUpdate(int menuCode, String menuName) {
+    @CsvSource({"11, 하양 민트초코죽"})  //, "12, 까만 딸기탕후루"
+    void testMergeUpdate(int menuCode, String menuName){
         EntityManager entityManager = EntityManagerGenerator.getInstance();
-        Menu foundMenu = entityManager.find(Menu.class, menuCode);
-        entityManager.detach(foundMenu);  // 준영속
+        Menu foundMenu = entityManager.find(Menu.class, menuCode); // 정어리빙수
+        entityManager.detach(foundMenu);        // 준영속  -> 정어리빙수가 떨어져나감
 
-        foundMenu.setMenuName(menuName);  // 상태값 변경완료 -> 상태 변경 변화는 없음
-        Menu refoundMenu = entityManager.find(Menu.class, menuCode);  // 영속상태
+        foundMenu.setMenuName(menuName);        // 상태값 변경완료 -> 상태변경변화는 없다. 정어리빙수 > 하양민트초코죽
+        Menu refoundMenu = entityManager.find(Menu.class, menuCode);  // 영속상태  정어리빙수
         entityManager.merge(foundMenu);
 
         assertEquals(menuName, refoundMenu.getMenuName());
     }
 
-    @DisplayName("Detach 후 merge한 데이터 save 테스트")
+    @DisplayName("detach 후 merge 한 데이터 save 테스트")
     @Test
     void testMergeSave() {
         EntityManager entityManager = EntityManagerGenerator.getInstance();
         EntityTransaction entityTransaction = entityManager.getTransaction();
         Menu foundMenu = entityManager.find(Menu.class, 20);
-        entityManager.detach(foundMenu);   // 준영속화
+        entityManager.detach(foundMenu);  // 준영속화
 
         entityTransaction.begin();
         foundMenu.setMenuName("치약맛 초코 아이스");
-        foundMenu.setMenuCode(999);
+        foundMenu.setMenuCode(999);   // 999,치약맛 초코 아이스,22000,5,N
         entityManager.merge(foundMenu);
-        entityTransaction.commit();  // 기존의 값이 없기 때문에 insert 쿼리가 발생
+        entityTransaction.commit();  // 기존에 값이 없기 때문에 insert문이 실행된다.
         assertEquals("치약맛 초코 아이스", entityManager.find(Menu.class, 999).getMenuName());
     }
 
@@ -152,21 +153,24 @@ class EntityLifeCycleTest {
     void testClearPersistenceContext(int menuCode) {
         EntityManager entityManager = EntityManagerGenerator.getInstance();
         Menu foundMenu = entityManager.find(Menu.class, menuCode);
-        // clear : 영속성 컨텍스트를 초기화한다. -> 컨텍스트 내의 모든 엔터티는 준영속화 된다.
+
+        // clear : 영속성 컨텍스트를 초기화 한다. -> 영속성 컨텍스트 내의 모든 엔터티는 준영속화 된다.
         entityManager.clear();
 
-         Menu expectedMenu = entityManager.find(Menu.class, menuCode);
-         assertNotEquals(foundMenu, expectedMenu);
+        System.out.println("==>>" + entityManager.contains(foundMenu));
+
+        Menu expectedMenu = entityManager.find(Menu.class, menuCode);
+        assertNotEquals(foundMenu, expectedMenu);
     }
 
     @DisplayName("준영속화 close 테스트")
     @ParameterizedTest
     @ValueSource(ints = {1, 3})
     void testClosePersistenceContext(int menuCode) {
-
         EntityManager entityManager = EntityManagerGenerator.getInstance();
         Menu foundMenu = entityManager.find(Menu.class, menuCode);  // 영속화
-// close : 영속성 컨텍스트를 종료한다. -> 영속성 컨텍스트 내의 모든 엔터티는 준 영속화 된다
+
+        // close : 영속성 컨텍스트를 종료한다. -> 영속성 컨텍스트 내의 모든 엔터티는 준 영속화 된다.
         entityManager.close();
 
         assertThrows(
@@ -177,9 +181,9 @@ class EntityLifeCycleTest {
 
     @DisplayName("영속성 엔터티 삭제 remove 테스트")
     @ParameterizedTest
-    @ValueSource(ints = {2})
+    @ValueSource(ints = {21})
     void testRemoveEntity(int menuCode) {
-      EntityManager entityManager = EntityManagerGenerator.getInstance();
+        EntityManager entityManager = EntityManagerGenerator.getInstance();
         EntityTransaction entityTransaction = entityManager.getTransaction();
         Menu foundMenu = entityManager.find(Menu.class, menuCode);  // 영속화
 
@@ -191,5 +195,7 @@ class EntityLifeCycleTest {
 
         Menu refoundMenu = entityManager.find(Menu.class, menuCode);
         assertNull(refoundMenu);
+        entityTransaction.rollback();
     }
+
 }

@@ -1,0 +1,25 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/menudb
+    username: ohgiraffers
+    password: ohgiraffers
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy
+    properties:
+      hibernate:
+        format_sql: true
+
+# ddl-auto 옵션선택
+# 개발 초기단계
+# create: 실행마다 DDL실행(기존의 테이블을 모두 drop)
+# create-drop : 실행마다 DDL실행, 종료시 모든 테이블 drop
+# update : 변경사항만 alter DDL실행(테이블이 없는 경우 create, 컬럼추가만 반영(컬럼 반영은 무시)
+
+# 운영시
+# validate : 생성/수정 DDL은 실행하지 않고, 유효성검사만 수행(테이블컬럼 매핑에 문제가 있는경우 예외를 던짐)
+# none: 아무것도 하지 않음. default

@@ -19,19 +19,19 @@ public class Application {
 
     public static void main(String[] args) {
 
-        // JdbcTransactionFactory : 수동 커밋, ManagedTransactionFactory : 자동 커밋
+        // JdbcTransactionFactory: 수동커밋, ManagedTransactionFactory: 자동커밋
         Environment environment = new Environment(
-                "dev", // 환경 정보 이름
-                new JdbcTransactionFactory(), // 트랜잭션 매니져 종류
+                "dev",  // 환경 정보 이름
+                new JdbcTransactionFactory(),  // 트랜잭션 매니져 종류(JDBC or MANAGED)
                 new PooledDataSource(
                         DRIVER, URL, USER, PASSWORD
-                ) // Conncetion Pool 사용 여부(Pooled or UnPooled)
+                ) // Connection Pool 사용여부(Pooled or UnPooled)
         );
 
         // 생성한 환경 설정 정보로 Mybatis 설정 객체 생성
         Configuration configuration = new Configuration(environment);
-        
-        // 설정 객채에 mapper 등록
+
+        // 설정 객체에 Mapper 등록
         configuration.addMapper(Mapper.class);
 
         // SqlSessionFactoryBuilder : SqlSessionFactory 타입의 하위 구현체 객체를 생성하기 위한 빌더 클래스
@@ -43,11 +43,10 @@ public class Application {
         SqlSession sqlSession = sqlSessionFactory.openSession(false);
 
         Mapper mapper = sqlSession.getMapper(Mapper.class);
+        Date now = mapper.selectDate();
+        System.out.println("now : " + now);
 
-        Date Now = mapper.selectDate();
-        System.out.println("Now = " + Now);
-
-        // SqldSession 반납
+        // SqlSession 반납
         sqlSession.close();
 
     }
