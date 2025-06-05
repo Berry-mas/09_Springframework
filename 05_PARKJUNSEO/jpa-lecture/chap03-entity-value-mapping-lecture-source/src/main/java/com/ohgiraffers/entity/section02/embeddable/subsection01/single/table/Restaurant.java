@@ -24,7 +24,7 @@ public class Restaurant {
     private String name;
 
     @Column(name="since")
-    private Year since;  // 오픈연도
+    private Year since;  // 오픈년도
 
     @Column(name="grade")
     @Enumerated(EnumType.STRING)
@@ -33,7 +33,6 @@ public class Restaurant {
     @Embedded
     private Address address;
 
-    // 특히 이 밑은 써먹으면 좋음
     @Column(name="created_at")
     @CreationTimestamp // insert 시각을 자동으로 주입
     private LocalDateTime createdAt;

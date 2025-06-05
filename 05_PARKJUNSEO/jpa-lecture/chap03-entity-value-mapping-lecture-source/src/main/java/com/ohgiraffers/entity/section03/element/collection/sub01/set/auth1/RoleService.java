@@ -30,7 +30,7 @@ public class RoleService {
         System.out.println("role.getPermissions( = " + role.getPermissions());
     }
 
-    @Transactional  // 얘가 있으니까 flush() 안해도 됨
+    @Transactional
     public void modifyRole(String id, Set<String> newPermissions){
 
         Role role = roleRepository.findById(id);
