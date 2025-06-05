@@ -12,3 +12,6 @@ GET http://localhost:8080/response/map
 
 ### file 응답
 GET http://localhost:8080/response/image
+
+### ResponseEntity 응답
+GET http://localhost:8080/response/entity
