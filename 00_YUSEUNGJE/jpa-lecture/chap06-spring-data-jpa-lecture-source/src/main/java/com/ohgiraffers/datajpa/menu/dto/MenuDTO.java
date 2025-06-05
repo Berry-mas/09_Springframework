@@ -1,12 +1,14 @@
 package com.ohgiraffers.datajpa.menu.dto;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import com.ohgiraffers.datajpa.menu.entity.Menu;
+import lombok.*;
 
 @Getter
 @Setter
 @ToString
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class MenuDTO {
 
     private int menuCode;
@@ -14,4 +16,14 @@ public class MenuDTO {
     private int menuPrice;
     private int categoryCode;
     private String orderableStatus;
+
+    public static MenuDTO changeMenuDto(Menu menu){
+        MenuDTO menuDto = MenuDTO.builder()
+                .menuCode(menu.getMenuCode())
+                .menuName(menu.getMenuName())
+                .menuPrice(menu.getMenuPrice())
+                .categoryCode(menu.getCategoryCode())
+                .orderableStatus(menu.getOrderableStatus()).build();
+        return menuDto;
+    }
 }
