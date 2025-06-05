@@ -5,4 +5,9 @@ package com.ohgiraffers.datajpa.menu.dto;
  *    - 단순한 매핑에는 적합하지만, 복잡한 변환이나 다이나믹 로직 적용에는 한계가 있음
  * */
 public interface MenuProjection {
+    int getMenuCode();
+    String getMenuName();
+    int getMenuPrice();
+    int getCategoryCode();
+    String getOrderableStatus();
 }
