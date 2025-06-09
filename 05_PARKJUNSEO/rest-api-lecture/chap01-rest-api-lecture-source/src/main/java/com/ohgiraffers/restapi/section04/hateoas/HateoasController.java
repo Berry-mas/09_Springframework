@@ -3,6 +3,7 @@ package com.ohgiraffers.restapi.section04.hateoas;
 import com.ohgiraffers.restapi.section02.responseentity.ResponseMessage;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
