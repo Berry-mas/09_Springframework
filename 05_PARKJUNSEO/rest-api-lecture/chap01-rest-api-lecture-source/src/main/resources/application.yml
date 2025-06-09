@@ -1,19 +1,9 @@
-spring.application.name=chap01-rest-api-lecture-source
-#spring:
-#  datasource:
-#    driver-class-name: com.mysql.cj.jdbc.Driver
-#    url: jdbc:mysql://localhost:3306/menudb
-#    username: ohgiraffers
-#    password: ohgiraffers
-#  jpa:
-#    show-sql: true
-#    hibernate:
-#      ddl-auto: none
-#      naming:
-#        physical-strategy: org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy
-#    properties:
-#      hibernate:
-#        format_sql: true
-#  output:
-#    ansi:
-#      enabled: always
+#spring.application.name=chap01-rest-api-lecture-source
+springdoc:
+  # 스캔할 떄 패키지 설정 (지정한 패키지 하위만 API 문서에 포함된다.)
+  packages-to-scan: com.ohgiraffers.restapi.section05
+  # consumes : 요청 데이터 타입
+  # produces : 응답 데이터 타입
+  default-consumes-media-type: application/json;charset=UTF-8
+  default-produces-media-type: application/json;charset=UTF-8
+
