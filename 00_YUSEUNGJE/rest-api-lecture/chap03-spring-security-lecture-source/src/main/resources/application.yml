@@ -18,3 +18,5 @@ mybatis:
   type-aliases-package: com.ohgiraffers.springsecurity.query.dto
 jwt:
   secret: DSLTe48dRZCTWW/Amp2qMmiiBzj622KtDQivozybkQo7yreBOjNF6TkCCxaXLhAKvgkqMki8zySjkFeDDcRR+w==
+  expiration: 1800000  # 30분 (access token)
+  refresh-expiration: 604800000 # 7일 (refresh token)

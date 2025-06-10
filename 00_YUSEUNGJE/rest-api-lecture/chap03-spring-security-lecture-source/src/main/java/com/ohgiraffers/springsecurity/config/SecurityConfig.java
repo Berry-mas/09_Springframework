@@ -1,5 +1,7 @@
 package com.ohgiraffers.springsecurity.config;
 
+import com.ohgiraffers.springsecurity.jwt.RestAccessDeniedHandler;
+import com.ohgiraffers.springsecurity.jwt.RestAuthenticationEntryPoint;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,6 +24,9 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 @RequiredArgsConstructor
 public class SecurityConfig {
 
+    private final RestAuthenticationEntryPoint restAuthenticationEntryPoint;
+    private final RestAccessDeniedHandler restAccessDeniedHandler;
+
     // 비밀번호 암호화
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -36,8 +41,14 @@ public class SecurityConfig {
         // 세션 로그인 x -> 토큰 로그인 설정
         .sessionManagement(session
                 -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+        // 인증 실패, 인가 실패 핸들러
+        .exceptionHandling(exception ->
+                exception.authenticationEntryPoint(restAuthenticationEntryPoint)    // 인증 실패
+                        .accessDeniedHandler(restAccessDeniedHandler)          // 인가 실패
+        )
         .authorizeHttpRequests(auth ->
-                 auth.requestMatchers(HttpMethod.POST,"/api/v1/users", "/api/v1/auth/login", "/api/v1/refresh").permitAll()
+                 auth.requestMatchers(HttpMethod.POST,"/api/v1/users", "/api/v1/auth/login"
+                                 , "/api/v1/auth/refresh", "/api/v1/auth/logout").permitAll()
                          .requestMatchers(HttpMethod.GET, "/api/v1/me").hasAuthority("USER")
                          .anyRequest().authenticated()
         );
