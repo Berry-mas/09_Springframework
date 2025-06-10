@@ -17,3 +17,7 @@ mybatis:
     map-underscore-to-camel-case: true
   mapper-locations: mappers/**/*.xml
   type-aliases-package: com.ohgiraffers.springsecurity.query.dto
+jwt:
+  secret: XV9XKtlKfqQv0cnSyFYL6QJ0a4e7gST/3WHE2sawDuXQjnjxEivMCb/+d1UeTFw2MEXXYtcdizExjEYD2sDi5A==
+  expiration: 1800000 # 30분 (access token)
+  refresh-expiration: 604800000 # 7일 (refresh token)
